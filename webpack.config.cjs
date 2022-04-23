@@ -40,6 +40,16 @@ module.exports = {
           { loader: 'sass-loader' },
         ],
       },
+      {
+        test: /\.(jpeg|webp)$/i,
+        type: 'asset/inline',
+        // use: [
+        //   {
+        //     loader: 'url-loader',
+        //     options: {}
+        //   }
+        // ]
+      }
     ],
   },
 };

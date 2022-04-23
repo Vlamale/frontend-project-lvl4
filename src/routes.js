@@ -1,10 +1,25 @@
-// @ts-check
+import AuthPage from "./pages/AuthPage.jsx"
 
-const host = '';
-const prefix = 'api/v1';
+const authRoutes = [
+    // {
+    //     path: '/',
+    //     Component: AuthWindow
+    // }
+]
 
-export default {
-  channelsPath: () => [host, prefix, 'channels'].join('/'),
-  channelPath: (id) => [host, prefix, 'channels', id].join('/'),
-  channelMessagesPath: (id) => [host, prefix, 'channels', id, 'messages'].join('/'),
-};
+const publicRoutes = [
+    {
+        path: '/',
+        redirectTo: '/login',
+        Component: AuthPage
+    },
+    {
+        path: '/login',
+        Component: AuthPage
+    }
+]
+
+export {
+    authRoutes,
+    publicRoutes
+}
