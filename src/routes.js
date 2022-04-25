@@ -1,10 +1,11 @@
 import AuthPage from "./pages/AuthPage.jsx"
+import ChatPage from "./pages/ChatPage.jsx"
 
 const authRoutes = [
-    // {
-    //     path: '/',
-    //     Component: AuthWindow
-    // }
+    {
+        path: '/',
+        Component: ChatPage
+    }
 ]
 
 const publicRoutes = [

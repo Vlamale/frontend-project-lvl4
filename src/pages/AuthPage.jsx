@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Row, Col, Image } from 'react-bootstrap'
 import loginImage from '../img/loginImage.jpeg'
+import { Link } from 'react-router-dom';
 import AuthForm from '../components/auth/SignInForm.jsx'
 
 const AuthPage = () => {
@@ -19,7 +20,7 @@ const AuthPage = () => {
 
                     </Card.Body>
                     <Card.Footer className="text-center p-4">
-                        <span>Нет аккаунта?</span> <a href="/home">Регистрация</a>
+                        <span>Нет аккаунта?</span> <Link to="/">Регистрация</Link>
                     </Card.Footer>
                 </Card>
             </Row>

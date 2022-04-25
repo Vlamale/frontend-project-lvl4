@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Form, FloatingLabel, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
+import axios from 'axios';
+import AppContext from '../../context/app/AppContext.jsx';
 
 const AuthWindow = () => {
+    const { setIsAuthorized } = useContext(AppContext)
+    const navigate = useNavigate()
+
     const authSchema = object({
         userName: string().required(),
-        userPassword: string().required('No password provided.').min(8, 'Password is too short - should be 8 chars minimum.')
+        userPassword: string().required()
     })
 
     const formik = useFormik({
@@ -14,36 +20,60 @@ const AuthWindow = () => {
             userName: '',
             userPassword: '',
         },
-        onSubmit: async (values) => {
-            const user = await authSchema.validate(values)
+        validationSchema: authSchema,
+        validateOnChange: false,
+        validateOnBlur: false,
+        onSubmit: async (values, { setFieldError }) => {
+            try {
+                const { data } = await axios.post('/api/v1/login', {
+                    username: values.userName,
+                    password: values.userPassword
+                })
+                localStorage.setItem('user-data', JSON.stringify(data))
+                console.log(data)
+                setIsAuthorized(true)
+                navigate('/', { replace: true })
+            } catch (err) {
+                setFieldError('userName', 'err')
+                setFieldError('userPassword', 'Неверные имя пользователя или пароль')
+            }
         }
     })
 
     return (
-        <Form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={formik.handleSubmit}>
+        <Form className="col-12 col-md-6 mt-3 mt-mb-0 needs-validation" onSubmit={formik.handleSubmit}>
             <h1 className="text-center mb-4">Войти:</h1>
 
             <FloatingLabel controlId="userName" label="Ваш ник">
                 <Form.Control
+                    required
                     className="mb-3"
                     type="text"
                     name="userName"
                     placeholder='Ваш ник'
                     onChange={formik.handleChange}
-                    value={formik.values.email}
+                    value={formik.values.userName}
+                    isInvalid={!!formik.errors.userName}
                 />
             </FloatingLabel>
 
             <FloatingLabel controlId="userPassword" label="Пароль">
                 <Form.Control
+                    required
                     className="mb-4"
                     type="password"
                     name="userPassword"
-                    placeholder='Ваш ник'
+                    placeholder='Пароль'
                     onChange={formik.handleChange}
-                    value={formik.values.email}
+                    value={formik.values.userPassword}
+                    isInvalid={!!formik.errors.userPassword}
                 />
+                <Form.Control.Feedback type="invalid" tooltip>
+                    {formik.errors.userPassword}
+                </Form.Control.Feedback>
             </FloatingLabel>
+
+
 
             <Button type="submit" className="mb-3 w-100" variant="outline-primary">Войти</Button>
         </Form>
