@@ -8,8 +8,9 @@ import '../assets/application.scss';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import AppProvider from './context/app/AppProvider.jsx';
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import store from './slices/index.js'
+import SocketProvider from './context/socket/SocketProvider.jsx';
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
@@ -19,7 +20,9 @@ ReactDOM.render(
   <BrowserRouter>
     <AppProvider>
       <Provider store={store}>
-        <App />
+        <SocketProvider>
+          <App />
+        </SocketProvider>
       </Provider>
     </AppProvider>
   </BrowserRouter>,

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import AppContext from './context/app/AppContext.jsx'
+import AppContext from './context/app/AppContext.js'
 import { authRoutes, publicRoutes } from './routes.js'
 import Header from './components/Header.jsx'
 import PNotFound from './pages/PNotFound.jsx'
@@ -8,7 +8,7 @@ import PNotFound from './pages/PNotFound.jsx'
 const getCurrentRoutes = (isAuthorized) => isAuthorized ? authRoutes : publicRoutes
 
 const App = () => {
-    const {isAuthorized} = useContext(AppContext)
+    const { isAuthorized } = useContext(AppContext)
     const [routes, setRoutes] = useState(getCurrentRoutes(isAuthorized))
 
     useEffect(() => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import AppContext from "./AppContext.jsx"
+import AppContext from "./AppContext.js"
 import {useState} from 'react'
 
 const AppProvider = ({children}) => {

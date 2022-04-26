@@ -3,7 +3,7 @@ import { Form, FloatingLabel, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
-import AppContext from '../../context/app/AppContext.jsx';
+import AppContext from '../../context/app/AppContext.js';
 import { publicHost } from '../../http/index.js';
 
 const AuthWindow = () => {

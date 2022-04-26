@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Message = () => {
+const Message = ({message: {messageText, author}}) => {
     return (
         <div className="chat-messages overflow-auto px-5 ">
             <div className="text-break mb-2">
-                <b>Zyrael</b>: jnlml;
+                <b>{author}</b>: {messageText}
             </div>
         </div>
     )
