@@ -8,6 +8,8 @@ import '../assets/application.scss';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import AppProvider from './context/app/AppProvider.jsx';
+import {Provider} from 'react-redux'
+import store from './slices/index.js'
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
@@ -16,7 +18,9 @@ if (process.env.NODE_ENV !== 'production') {
 ReactDOM.render(
   <BrowserRouter>
     <AppProvider>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </AppProvider>
   </BrowserRouter>,
   document.querySelector('#chat')

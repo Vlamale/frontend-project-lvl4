@@ -3,8 +3,8 @@ import { Form, FloatingLabel, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
-import axios from 'axios';
 import AppContext from '../../context/app/AppContext.jsx';
+import { publicHost } from '../../http/index.js';
 
 const AuthWindow = () => {
     const { setIsAuthorized } = useContext(AppContext)
@@ -25,7 +25,7 @@ const AuthWindow = () => {
         validateOnBlur: false,
         onSubmit: async (values, { setFieldError }) => {
             try {
-                const { data } = await axios.post('/api/v1/login', {
+                const { data } = await publicHost.post('/login', {
                     username: values.userName,
                     password: values.userPassword
                 })
