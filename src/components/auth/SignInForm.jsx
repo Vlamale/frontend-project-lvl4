@@ -6,7 +6,7 @@ import { object, string } from 'yup';
 import AppContext from '../../context/app/AppContext.js';
 import { publicHost } from '../../http/index.js';
 
-const AuthWindow = () => {
+const SignInForm = () => {
     const { setIsAuthorized } = useContext(AppContext)
     const navigate = useNavigate()
 
@@ -30,7 +30,6 @@ const AuthWindow = () => {
                     password: values.userPassword
                 })
                 localStorage.setItem('user-data', JSON.stringify(data))
-                console.log(data)
                 setIsAuthorized(true)
                 navigate('/', { replace: true })
             } catch (err) {
@@ -80,4 +79,4 @@ const AuthWindow = () => {
     )
 }
 
-export default AuthWindow
+export default SignInForm

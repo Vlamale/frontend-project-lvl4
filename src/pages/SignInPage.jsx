@@ -2,9 +2,9 @@ import React from 'react'
 import { Card, Row, Col, Image } from 'react-bootstrap'
 import loginImage from '../img/loginImage.jpeg'
 import { Link } from 'react-router-dom';
-import AuthForm from '../components/auth/SignInForm.jsx'
+import SignInForm from '../components/auth/SignInForm.jsx'
 
-const AuthPage = () => {
+const SignInPage = () => {
 
     return (
         <div className="container-fluid h-100">
@@ -16,11 +16,11 @@ const AuthPage = () => {
                             <Image src={loginImage} roundedCircle />
                         </Col>
 
-                        <AuthForm />
+                        <SignInForm />
 
                     </Card.Body>
                     <Card.Footer className="text-center p-4">
-                        <span>Нет аккаунта?</span> <Link to="/">Регистрация</Link>
+                        <span>Нет аккаунта?</span> <Link to="/signup">Регистрация</Link>
                     </Card.Footer>
                 </Card>
             </Row>
@@ -28,5 +28,5 @@ const AuthPage = () => {
     )
 }
 
-export default AuthPage
+export default SignInPage
 

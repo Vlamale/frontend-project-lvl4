@@ -1,5 +1,6 @@
-import AuthPage from "./pages/AuthPage.jsx"
+import AuthPage from "./pages/SignInPage.jsx"
 import ChatPage from "./pages/ChatPage.jsx"
+import SignUpPage from "./pages/SignUpPage.jsx"
 
 const authRoutes = [
     {
@@ -17,6 +18,10 @@ const publicRoutes = [
     {
         path: '/login',
         Component: AuthPage
+    },
+    {
+        path: '/signup',
+        Component: SignUpPage
     }
 ]
 

@@ -41,7 +41,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpeg|webp)$/i,
+        test: /\.(jpeg|webp|jpg)$/i,
         type: 'asset/inline',
       }
     ],
