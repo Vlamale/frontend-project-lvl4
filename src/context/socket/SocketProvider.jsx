@@ -1,8 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch, batch} from 'react-redux'
 import SocketContext from './SocketContext.js'
 import { io } from "socket.io-client";
 import { addMessage } from '../../slices/messagesSlice.js';
+import { addChannel, removeChannel, renameChannel, setActiveChannel, setDefaultChannelAsActive } from '../../slices/channelsSlice.js';
 
 const SocketProvider = ({ children }) => {
     const socket = useRef(null)
@@ -13,22 +14,30 @@ const SocketProvider = ({ children }) => {
         socket.current = io()
 
         socket.current.on("connect", () => {
-            console.log('hello')
             socket.current.on('newMessage', (socket) => {
                 dispatch(addMessage(socket));
-                console.log(socket);
             })
     
             socket.current.on('newChannel', (socket) => {
-                console.log(socket);
+                dispatch(addChannel(socket));
+                dispatch(setActiveChannel(socket.id));
             })
     
             socket.current.on('removeChannel', (socket) => {
-                console.log(socket);
+                batch(() => {
+                    dispatch(removeChannel(socket.id))
+                    dispatch(setDefaultChannelAsActive())
+                })
             })
     
             socket.current.on('renameChannel', (socket) => {
-                console.log(socket);
+                const updateData = {
+                    id: socket.id,
+                    changes: {
+                        name: socket.name
+                    }
+                }
+                dispatch(renameChannel(updateData))
             })
 
             setConnection(true)

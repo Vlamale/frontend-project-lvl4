@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Col } from 'react-bootstrap'
 import { messagesSelectors } from '../../slices/messagesSlice.js'
@@ -9,16 +9,25 @@ import MessageListHeader from './MessageListHeader.jsx'
 const MessageList = () => {
     const activeChannelId = useSelector(state => state.channels.activeChannelId)
     const messages = useSelector(messagesSelectors.selectAll)
+    const messagesAnchorRef = useRef(null)
+
+    useEffect(() => {
+        messagesAnchorRef.current.scrollIntoView({ behavior: "smooth" })
+    }, [messages, activeChannelId])
 
     return (
         <Col className="h-100 p-0" xs={8}>
             <div className="d-flex flex-column h-100">
                 <MessageListHeader />
 
-                {messages.filter((message) => message.channel === activeChannelId)
-                    .map((message) => (
-                        <Message key={message.id} message={message} />
-                    ))}
+                <div className="overflow-auto">
+                    {messages
+                        .filter((message) => message.channel === activeChannelId)
+                        .map((message) => (
+                            <Message key={message.id} message={message} />
+                        ))}
+                    <div ref={messagesAnchorRef} />
+                </div>
 
                 <MessageForm />
             </div>

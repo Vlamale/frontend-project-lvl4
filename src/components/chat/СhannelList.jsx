@@ -15,7 +15,9 @@ const ChannelList = () => {
 
             <ul className="nav flex-column nav-pills nav-fill px-2">
                 {channels.map((data) => (
-                    <Channel key={data.id} data={data} activeChannelId={activeChannelId} />
+                    <li key={data.id} className="w-100">
+                        <Channel data={data} activeChannelId={activeChannelId} />
+                    </li>
                 ))}
             </ul>
         </Col>

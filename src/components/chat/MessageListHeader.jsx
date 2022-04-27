@@ -9,7 +9,7 @@ const MessageListHeader = () => {
     return (
         <div className="bg-light mb-4 p-3 shadow-sm small">
             <p className="m-0">
-                <strong># {activeChannel?.name}</strong>
+                <strong className="text-truncate d-block"># {activeChannel?.name}</strong>
             </p>
             <span className="text-muted">179 сообщений</span>
         </div>
