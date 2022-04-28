@@ -7,6 +7,7 @@ import AppContext from '../../context/app/AppContext.js'
 import { publicHost } from '../../http/index.js'
 import { useTranslation } from 'react-i18next'
 import routesPath from '../../consts/routesPath.js'
+import { notifyError } from '../../notify.js'
 
 const SignUpForm = () => {
     const { setIsAuthorized } = useContext(AppContext)
@@ -37,6 +38,7 @@ const SignUpForm = () => {
                 setIsAuthorized(true)
                 navigate(routesPath.main, { replace: true })
             } catch (err) {
+                notifyError(t('notify.error.connect'))
                 setSubmitFailed(true)
                 setFieldError('userName', '')
                 setFieldError('userPassword', '')

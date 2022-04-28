@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { hideModal } from '../../slices/modalSlice.js'
 import SocketContext from '../../context/socket/SocketContext.js'
 import { useTranslation } from 'react-i18next'
+import { notifySuccess } from '../../notify.js'
 
 const RemoveChannelModal = () => {
     const dispatch = useDispatch()
@@ -22,6 +23,7 @@ const RemoveChannelModal = () => {
         socket.emit('removeChannel', { id: channelId }, () => {
             setIsSending(false)
             hideModalHandler()
+            notifySuccess(t('notify.success.removeChannel'))
         })
     }
 

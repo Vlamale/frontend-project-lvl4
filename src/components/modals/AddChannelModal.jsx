@@ -7,6 +7,7 @@ import { useFormik } from 'formik'
 import SocketContext from '../../context/socket/SocketContext.js'
 import { channelsSelectors } from '../../slices/channelsSlice.js'
 import { useTranslation } from 'react-i18next'
+import { notifySuccess } from '../../notify.js'
 
 const AddChannelModal = () => {
     const dispatch = useDispatch()
@@ -48,6 +49,7 @@ const AddChannelModal = () => {
             socket.emit('newChannel', channelData, () => {
                 setIsSending(false)
                 hideModalHandler()
+                notifySuccess(t('notify.success.addChannel'))
             })
         }
     })

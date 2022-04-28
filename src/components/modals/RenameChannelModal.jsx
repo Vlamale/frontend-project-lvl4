@@ -6,6 +6,7 @@ import { useFormik } from 'formik'
 import SocketContext from '../../context/socket/SocketContext.js'
 import { channelsSelectors } from '../../slices/channelsSlice.js'
 import { useTranslation } from 'react-i18next'
+import { notifySuccess } from '../../notify.js'
 
 const RenameChannelModal = () => {
     const channelData = useSelector(state => state.modal.extra)
@@ -44,6 +45,7 @@ const RenameChannelModal = () => {
             socket.emit('renameChannel', channelRequestData, () => {
                 setIsSending(false)
                 hideModalHandler()
+                notifySuccess(t('notify.success.renameChannel'))
             })
         }
     })

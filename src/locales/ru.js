@@ -71,6 +71,16 @@ export default {
                 text: 'Но вы можете перейти',
                 link: 'на главную страницу'
             }
-        }
+        },
+        notify: {
+            error: {
+                connect: 'Ошибка соединения',
+            },
+            success: {
+                addChannel: 'Канал создан',
+                removeChannel: 'Канал удалён',
+                renameChannel: 'Канал переименован',
+            }
+        },
     }
 }
