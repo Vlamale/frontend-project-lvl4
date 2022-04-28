@@ -1,10 +1,10 @@
 import React from 'react'
 import { Card, Row, Col, Image } from 'react-bootstrap'
 import signUpImage from '../img/signUpImage.jpg'
-import SignUpForm from '../components/auth/SignUpForm.jsx';
+import SignUpForm from '../components/auth/SignUpForm.jsx'
 
 const SignUpPage = () => {
-console.log('jj');
+
     return (
         <div className="container-fluid h-100">
             <Row className="row justify-content-center align-content-center h-100">

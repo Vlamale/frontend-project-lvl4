@@ -5,10 +5,12 @@ import cn from 'classnames'
 import { useDispatch } from 'react-redux'
 import { setActiveChannel } from '../../slices/channelsSlice.js'
 import { openModal } from '../../slices/modalSlice.js'
+import { useTranslation } from 'react-i18next'
 
 const Channel = ({ data: { name, removable, id }, activeChannelId }) => {
     const dispatch = useDispatch()
     const isActiveChannel = activeChannelId === id
+    const { t } = useTranslation()
 
     const buttonStyles = cn(
         'font-weight-bold',
@@ -53,14 +55,14 @@ const Channel = ({ data: { name, removable, id }, activeChannelId }) => {
             />
 
             <Dropdown.Menu>
-                <Dropdown.Item onClick={() => dispatch(openModal({ type: 'removeChannel', extra: { id } }))}>Удалить</Dropdown.Item>
+                <Dropdown.Item onClick={() => dispatch(openModal({ type: 'removeChannel', extra: { id } }))}>{t('channels.remove')}</Dropdown.Item>
                 <Dropdown.Item onClick={() => {
                     const extra = {
                         id,
                         name
                     }
                     dispatch(openModal({ type: 'renameChannel', extra }))
-                }}>Переименовать</Dropdown.Item>
+                }}>{t('channels.rename')}</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
     )

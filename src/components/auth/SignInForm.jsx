@@ -1,14 +1,17 @@
 import React, { useContext } from 'react'
 import { Form, FloatingLabel, Button } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import { object, string } from 'yup';
-import AppContext from '../../context/app/AppContext.js';
-import { publicHost } from '../../http/index.js';
+import { useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
+import { object, string } from 'yup'
+import AppContext from '../../context/app/AppContext.js'
+import { publicHost } from '../../http/index.js'
+import { useTranslation } from 'react-i18next'
+import routesPath from '../../consts/routesPath.js'
 
 const SignInForm = () => {
     const { setIsAuthorized } = useContext(AppContext)
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
     const authSchema = object({
         userName: string().required(),
@@ -31,38 +34,38 @@ const SignInForm = () => {
                 })
                 localStorage.setItem('user-data', JSON.stringify(data))
                 setIsAuthorized(true)
-                navigate('/', { replace: true })
+                navigate(routesPath.main, { replace: true })
             } catch (err) {
                 setFieldError('userName', 'err')
-                setFieldError('userPassword', 'Неверные имя пользователя или пароль')
+                setFieldError('userPassword', t('signIn.incorrectUserData'))
             }
         }
     })
 
     return (
         <Form className="col-12 col-md-6 mt-3 mt-mb-0 needs-validation" onSubmit={formik.handleSubmit}>
-            <h1 className="text-center mb-4">Войти:</h1>
+            <h1 className="text-center mb-4">{t('signIn.title')}</h1>
 
-            <FloatingLabel controlId="userName" label="Ваш ник">
+            <FloatingLabel controlId="userName" label={t('signIn.namePlaceholder')}>
                 <Form.Control
                     required
                     className="mb-3"
                     type="text"
                     name="userName"
-                    placeholder='Ваш ник'
+                    placeholder={t('signIn.namePlaceholder')}
                     onChange={formik.handleChange}
                     value={formik.values.userName}
                     isInvalid={!!formik.errors.userName}
                 />
             </FloatingLabel>
 
-            <FloatingLabel controlId="userPassword" label="Пароль">
+            <FloatingLabel controlId="userPassword" label={t('signIn.passwordPlaceholder')}>
                 <Form.Control
                     required
                     className="mb-4"
                     type="password"
                     name="userPassword"
-                    placeholder='Пароль'
+                    placeholder={t('signIn.passwordPlaceholder')}
                     onChange={formik.handleChange}
                     value={formik.values.userPassword}
                     isInvalid={!!formik.errors.userPassword}
@@ -74,7 +77,7 @@ const SignInForm = () => {
 
 
 
-            <Button type="submit" className="mb-3 w-100" variant="outline-primary">Войти</Button>
+            <Button type="submit" className="mb-3 w-100" variant="outline-primary">{t('signIn.submitBtn')}</Button>
         </Form>
     )
 }

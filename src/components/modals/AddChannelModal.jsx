@@ -6,6 +6,7 @@ import { hideModal } from '../../slices/modalSlice.js'
 import { useFormik } from 'formik'
 import SocketContext from '../../context/socket/SocketContext.js'
 import { channelsSelectors } from '../../slices/channelsSlice.js'
+import { useTranslation } from 'react-i18next'
 
 const AddChannelModal = () => {
     const dispatch = useDispatch()
@@ -13,6 +14,7 @@ const AddChannelModal = () => {
     const { socket } = useContext(SocketContext)
     const [isSending, setIsSending] = useState(false)
     const inputRef = useRef(null)
+    const { t } = useTranslation()
 
     useEffect(() => {
         inputRef.current?.focus()
@@ -23,7 +25,7 @@ const AddChannelModal = () => {
     }
 
     const addChannelSchema = object({
-        name: string().required('Обязательное поле')
+        name: string().required(t('formErrors.required'))
     })
 
     const formik = useFormik({
@@ -36,7 +38,7 @@ const AddChannelModal = () => {
             const checkExistingName = channels.find(ch => ch.name === values.name)
 
             if (checkExistingName) {
-                setFieldError('name', 'Должно быть уникальным')
+                setFieldError('name', t('formErrors.mustBeUnique'))
                 return
             }
 
@@ -53,7 +55,7 @@ const AddChannelModal = () => {
     return (
         <Modal centered show onHide={hideModalHandler}>
             <Modal.Header className="mb-4" closeButton>
-                <Modal.Title>Добавить канал</Modal.Title>
+                <Modal.Title>{t('modals.addChannel.title')}</Modal.Title>
             </Modal.Header>
 
             <Form className="py-1 border-0 rounded-2 p-3" onSubmit={formik.handleSubmit} >
@@ -71,8 +73,8 @@ const AddChannelModal = () => {
                 </Form.Control.Feedback>
 
                 <Modal.Footer className="border-0">
-                    <Button variant="secondary" onClick={hideModalHandler}>Отменить</Button>
-                    <Button type="submit" variant="primary" disabled={isSending}>Отправить</Button>
+                    <Button variant="secondary" onClick={hideModalHandler}>{t('modals.addChannel.cancleBtn')}</Button>
+                    <Button type="submit" variant="primary" disabled={isSending}>{t('modals.addChannel.submitBtn')}</Button>
                 </Modal.Footer>
             </Form>
         </Modal>

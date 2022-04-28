@@ -1,4 +1,4 @@
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
+import { createSlice, createEntityAdapter, createSelector } from '@reduxjs/toolkit'
 import _ from 'lodash'
 import { removeChannel } from './channelsSlice.js'
 import { fetchAllChatData } from './thunks.js'
@@ -19,11 +19,21 @@ const messagesSlice = createSlice({
             .addCase(removeChannel, (state, action) => {
                 const filteredMessages = Object.values(state.entities)
                     .filter(msg => msg.channel !== action.payload)
-                
+
                 messagesAdapter.setAll(state, filteredMessages)
             })
     }
 })
+
+export const getTotalByActiveChannel = createSelector(
+    (state) => state,
+    (state) => {
+        const activeChannelId = state.channels.activeChannelId
+        return Object.values(state.messages.entities)
+            .filter(msg => msg.channel === activeChannelId)
+            .length
+    }
+)
 
 export const {
     addMessage

@@ -2,9 +2,9 @@ import React, { useEffect, useContext, useState } from 'react'
 import {useSelector} from 'react-redux'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import AppContext from './context/app/AppContext.js'
-import { authRoutes, publicRoutes } from './routes.js'
+import { authRoutes, publicRoutes } from './consts/routes.js'
 import Header from './components/Header.jsx'
-import PNotFound from './pages/PNotFound.jsx'
+import PNotFound from './pages/notFoundPage.jsx'
 import Modal from './components/modals/index.js'
 
 const getCurrentRoutes = (isAuthorized) => isAuthorized ? authRoutes : publicRoutes

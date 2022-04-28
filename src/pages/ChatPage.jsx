@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Row } from 'react-bootstrap'
-import { fetchAllChatData } from '../slices/thunks.js';
-import ChannelList from '../components/chat/СhannelList.jsx';
-import MessageList from '../components/chat/MessageList.jsx';
+import { fetchAllChatData } from '../slices/thunks.js'
+import ChannelList from '../components/chat/СhannelList.jsx'
+import MessageList from '../components/chat/MessageList.jsx'
 
 const ChatPage = () => {
     const dispatch = useDispatch()

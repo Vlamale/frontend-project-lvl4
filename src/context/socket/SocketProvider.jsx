@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, batch} from 'react-redux'
 import SocketContext from './SocketContext.js'
-import { io } from "socket.io-client";
-import { addMessage } from '../../slices/messagesSlice.js';
-import { addChannel, removeChannel, renameChannel, setActiveChannel, setDefaultChannelAsActive } from '../../slices/channelsSlice.js';
+import { io } from "socket.io-client"
+import { addMessage } from '../../slices/messagesSlice.js'
+import { addChannel, removeChannel, renameChannel, setActiveChannel, setDefaultChannelAsActive } from '../../slices/channelsSlice.js'
 
 const SocketProvider = ({ children }) => {
     const socket = useRef(null)
@@ -15,12 +15,12 @@ const SocketProvider = ({ children }) => {
 
         socket.current.on("connect", () => {
             socket.current.on('newMessage', (socket) => {
-                dispatch(addMessage(socket));
+                dispatch(addMessage(socket))
             })
     
             socket.current.on('newChannel', (socket) => {
-                dispatch(addChannel(socket));
-                dispatch(setActiveChannel(socket.id));
+                dispatch(addChannel(socket))
+                dispatch(setActiveChannel(socket.id))
             })
     
             socket.current.on('removeChannel', (socket) => {
@@ -41,7 +41,7 @@ const SocketProvider = ({ children }) => {
             })
 
             setConnection(true)
-        });
+        })
 
     }, [])
 

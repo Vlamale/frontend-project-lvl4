@@ -1,20 +1,23 @@
 import React, { useContext, useState } from 'react'
 import { Form, FloatingLabel, Button } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import { object, string, ref } from 'yup';
-import AppContext from '../../context/app/AppContext.js';
-import { publicHost } from '../../http/index.js';
+import { useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
+import { object, string, ref } from 'yup'
+import AppContext from '../../context/app/AppContext.js'
+import { publicHost } from '../../http/index.js'
+import { useTranslation } from 'react-i18next'
+import routesPath from '../../consts/routesPath.js'
 
 const SignUpForm = () => {
     const { setIsAuthorized } = useContext(AppContext)
-    const [submitFailed, setSubmitFailed] = useState(false);
+    const [submitFailed, setSubmitFailed] = useState(false)
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
     const authSchema = object({
-        userName: string().required('Обязательное поле').matches(/^.{3,35}$/, 'От 3 до 20 символов'),
-        userPassword: string().required('Обязательное поле').min(6, 'Не менее 6 символов'),
-        confirmPassword: string().required('Обязательное поле').oneOf([ref('userPassword'), null], 'Пароли должны совпадать'),
+        userName: string().required(t('formErrors.required')).matches(/^.{3,35}$/, t('formErrors.from3To20')),
+        userPassword: string().required(t('formErrors.required')).min(6, t('formErrors.atLeast6')),
+        confirmPassword: string().required(t('formErrors.required')).oneOf([ref('userPassword'), null], t('formErrors.passwordsMatch')),
     })
 
     const formik = useFormik({
@@ -32,13 +35,13 @@ const SignUpForm = () => {
                 })
                 localStorage.setItem('user-data', JSON.stringify(data))
                 setIsAuthorized(true)
-                navigate('/', { replace: true })
+                navigate(routesPath.main, { replace: true })
             } catch (err) {
                 setSubmitFailed(true)
                 setFieldError('userName', '')
                 setFieldError('userPassword', '')
                 if (err.response.status == 409) {
-                    setFieldError('confirmPassword', 'Такой пользователь уже существует')
+                    setFieldError('confirmPassword', t('formErrors.userexists'))
                 }
             }
         }
@@ -46,15 +49,15 @@ const SignUpForm = () => {
 
     return (
         <Form className="col-12 col-md-6 mt-3 mt-mb-0 needs-validation" onSubmit={formik.handleSubmit}>
-            <h1 className="text-center mb-4">Регистрация</h1>
+            <h1 className="text-center mb-4">{t('signUp.title')}</h1>
 
-            <FloatingLabel controlId="userName" label="Имя пользователя">
+            <FloatingLabel controlId="userName" label={t('signUp.namePlaceholder')}>
                 <Form.Control
                     required
                     className="mb-3"
                     type="text"
                     name="userName"
-                    placeholder='Имя пользователя'
+                    placeholder={t('signUp.namePlaceholder')}
                     onChange={formik.handleChange}
                     value={formik.values.userName}
                     onBlur={formik.handleBlur}
@@ -67,13 +70,13 @@ const SignUpForm = () => {
                 )}
             </FloatingLabel>
 
-            <FloatingLabel controlId="userPassword" label="Пароль">
+            <FloatingLabel controlId="userPassword" label={t('signUp.passwordPlaceholder')}>
                 <Form.Control
                     required
                     className="mb-4"
                     type="password"
                     name="userPassword"
-                    placeholder='Пароль'
+                    placeholder={t('signUp.passwordPlaceholder')}
                     onChange={formik.handleChange}
                     value={formik.values.userPassword}
                     onBlur={formik.handleBlur}
@@ -86,13 +89,13 @@ const SignUpForm = () => {
                 )}
             </FloatingLabel>
 
-            <FloatingLabel controlId="confirmPassword" label="Подтвердите пароль">
+            <FloatingLabel controlId="confirmPassword" label={t('signUp.confirmPasswordPlaceholder')}>
                 <Form.Control
                     required
                     className="mb-4"
                     type="password"
                     name="confirmPassword"
-                    placeholder='Подтвердите пароль'
+                    placeholder={t('signUp.confirmPasswordPlaceholder')}
                     onChange={formik.handleChange}
                     value={formik.values.confirmPassword}
                     onBlur={formik.handleBlur}
@@ -107,7 +110,7 @@ const SignUpForm = () => {
 
 
 
-            <Button type="submit" className="mb-3 w-100" variant="outline-primary">Зарегистрироваться</Button>
+            <Button type="submit" className="mb-3 w-100" variant="outline-primary">{t('signUp.submitBtn')}</Button>
         </Form>
     )
 }

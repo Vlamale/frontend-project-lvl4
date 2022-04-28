@@ -3,12 +3,14 @@ import React, { useContext, useState, useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Form } from 'react-bootstrap'
 import SocketContext from '../../context/socket/SocketContext.js'
+import { useTranslation } from 'react-i18next'
 
 const MessageForm = () => {
     const activeChannelId = useSelector(state => state.channels.activeChannelId)
     const [isSending, setIsSending] = useState(false)
     const { socket } = useContext(SocketContext)
     const inputRef = useRef(null)
+    const { t } = useTranslation()
 
     useEffect(() => {
         inputRef.current.focus()
@@ -45,7 +47,7 @@ const MessageForm = () => {
                         className="border-0 p-0 ps-2 form-control"
                         type="text"
                         name="message"
-                        placeholder='Введите сообщение...'
+                        placeholder={t('messages.typePlaceholder')}
                         onChange={formik.handleChange}
                         value={formik.values.message}
                     />
@@ -54,7 +56,7 @@ const MessageForm = () => {
                         type="submit"
                         disabled={formik.values.message.trim().length === 0 || isSending}
                     >
-                        Send
+                        {t('messages.sendBtn')}
                     </button>
                 </div>
             </Form>
