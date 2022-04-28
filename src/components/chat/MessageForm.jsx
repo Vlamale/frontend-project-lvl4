@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Form } from 'react-bootstrap'
 import SocketContext from '../../context/socket/SocketContext.js'
 import { useTranslation } from 'react-i18next'
+import filter from 'leo-profanity'
 
 const MessageForm = () => {
     const activeChannelId = useSelector(state => state.channels.activeChannelId)
@@ -13,6 +14,7 @@ const MessageForm = () => {
     const { t } = useTranslation()
 
     useEffect(() => {
+        filter.add(filter.getDictionary('ru'))
         inputRef.current.focus()
     }, [])
 
@@ -24,7 +26,7 @@ const MessageForm = () => {
             setIsSending(true)
             const userName = JSON.parse(localStorage.getItem('user-data')).username
             const messageData = {
-                messageText: values.message,
+                messageText: filter.clean(values.message),
                 author: userName,
                 channel: activeChannelId
             }

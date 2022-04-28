@@ -1,9 +1,9 @@
-const main = '/'
-const login = 'login'
-const signUp = '/signup'
+const main = '/';
+const login = 'login';
+const signUp = '/signup';
 
 export default {
-    main,
-    login,
-    signUp
-}
+  main,
+  login,
+  signUp,
+};

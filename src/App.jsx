@@ -5,7 +5,7 @@ import AppContext from './context/app/AppContext.js'
 import { authRoutes, publicRoutes } from './consts/routes.js'
 import Header from './components/Header.jsx'
 import PNotFound from './pages/notFoundPage.jsx'
-import Modal from './components/modals/index.js'
+import Modal from './components/modals/index.jsx'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 

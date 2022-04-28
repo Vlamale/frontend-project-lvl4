@@ -1,8 +1,8 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
 const AppContext = createContext({
-    isAuthorized: false,
-    setIsAuthorized: () => {},
+  isAuthorized: false,
+  setIsAuthorized: () => {},
 });
 
-export default AppContext
+export default AppContext;

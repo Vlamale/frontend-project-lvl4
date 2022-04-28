@@ -1,21 +1,21 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const publicHost = axios.create({
-    baseURL: '/api/v1',
-})
+  baseURL: '/api/v1',
+});
 
 const authHost = axios.create({
-    baseURL: '/api/v1',
-})
+  baseURL: '/api/v1',
+});
 
 authHost.interceptors.request.use((config) => {
-    const token = JSON.parse(localStorage.getItem('user-data')).token
-    config.headers.Authorization = `Bearer ${token}`
+  const { token } = JSON.parse(localStorage.getItem('user-data'));
+  config.headers.Authorization = `Bearer ${token}`;
 
-    return config
-})
+  return config;
+});
 
 export {
-    publicHost,
-    authHost
-}
+  publicHost,
+  authHost,
+};
