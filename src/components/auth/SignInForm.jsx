@@ -39,7 +39,7 @@ function SignInForm() {
       } catch (err) {
         notifyError(t('notify.error.connect'));
         setFieldError('userName', 'err');
-        setFieldError('userPassword', t('signIn.incorrectUserData'));
+        setFieldError('userPassword', t('formErrors.incorrectUserData'));
       }
     },
   });
