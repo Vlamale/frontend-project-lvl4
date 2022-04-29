@@ -5,27 +5,28 @@ import 'regenerator-runtime/runtime.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../assets/application.scss';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import App from './App.jsx';
-import AppProvider from './context/app/AppProvider.jsx';
-import store from './slices/index.js';
-import SocketProvider from './context/socket/SocketProvider.jsx';
 import './locales/i18n.js';
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
+const rollbarConfig = {
+  accessToken: '1eee01cbbf6c4972a59b624f02b6e26a',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+  payload: {
+    environment: 'production',
+  },
+};
+
 ReactDOM.render(
-  <BrowserRouter>
-    <AppProvider>
-      <Provider store={store}>
-        <SocketProvider>
-          <App />
-        </SocketProvider>
-      </Provider>
-    </AppProvider>
-  </BrowserRouter>,
+  <RollbarProvider config={rollbarConfig}>
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  </RollbarProvider>,
   document.querySelector('#chat'),
 );

@@ -16,7 +16,7 @@ function MessageList() {
   }, [messages, activeChannelId]);
 
   return (
-    <Col className="h-100 p-0" xs={8}>
+    <Col className="h-100 p-0" xs={8} md={10}>
       <div className="d-flex flex-column h-100">
         <MessageListHeader />
 
