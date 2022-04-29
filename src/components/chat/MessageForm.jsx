@@ -49,6 +49,7 @@ function MessageForm() {
             required
             ref={inputRef}
             className="border-0 p-0 ps-2 form-control"
+            aria-label="Новое сообщение"
             type="text"
             name="message"
             placeholder={t('messages.typePlaceholder')}
@@ -61,6 +62,7 @@ function MessageForm() {
             disabled={formik.values.message.trim().length === 0 || isSending}
           >
             {t('messages.sendBtn')}
+            <span className="visually-hidden">Отправить</span>
           </button>
         </div>
       </Form>

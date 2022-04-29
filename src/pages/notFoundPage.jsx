@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import notFoundImg from '../img/notFoundImg.webp';
 import routesPath from '../consts/routesPath.js';
-import { Link } from 'react-router-dom';
 
 const notFoundPage = () => {
   const { t } = useTranslation();
@@ -13,8 +13,11 @@ const notFoundPage = () => {
       <Image src={notFoundImg} />
       <h1 className="h4 text-muted">{t('notFoundPage.title')}</h1>
       <p className="text-muted">
-        {t('notFoundPage.body.text')} 
-        <Link to={routesPath.main}> {t('notFoundPage.body.link')}</Link>
+        {t('notFoundPage.body.text')}
+        <Link to={routesPath.main}>
+          {' '}
+          {t('notFoundPage.body.link')}
+        </Link>
       </p>
     </div>
   );

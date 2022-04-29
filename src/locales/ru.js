@@ -9,6 +9,7 @@ export default {
       remove: 'Удалить',
       rename: 'Переименовать',
       addBtn: '+',
+      channelControl: 'Управление каналом',
     },
     messages: {
       typePlaceholder: 'Введите сообщение...',
@@ -50,6 +51,7 @@ export default {
     modals: {
       addChannel: {
         title: 'Добавить канал',
+        channelName: 'Имя канала',
         cancleBtn: 'Отменить',
         submitBtn: 'Отправить',
       },
@@ -61,6 +63,7 @@ export default {
       },
       renameChannel: {
         title: 'Переименовать канал',
+        channelName: 'Имя канала',
         cancleBtn: 'Отменить',
         submitBtn: 'Отправить',
       },

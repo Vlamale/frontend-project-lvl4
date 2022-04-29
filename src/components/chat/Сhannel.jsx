@@ -49,7 +49,7 @@ function Channel({ data: { name, removable, id }, activeChannelId }) {
         className={buttonStyles}
         onClick={handleSelectChannel}
       >
-        #&nbsp;
+        <span>#&nbsp;</span>
         {' '}
         {name}
       </Button>
@@ -57,25 +57,27 @@ function Channel({ data: { name, removable, id }, activeChannelId }) {
       <Dropdown.Toggle
         split
         variant={isActiveChannel ? 'secondary' : 'light'}
-      />
+      >
 
-      <Dropdown.Menu>
-        <Dropdown.Item
-          onClick={() => dispatch(openModal({ type: 'removeChannel', extra: { id } }))}
-        >
-          {t('channels.remove')}
-        </Dropdown.Item>
-        <Dropdown.Item onClick={() => {
-          const extra = {
-            id,
-            name,
-          };
-          dispatch(openModal({ type: 'renameChannel', extra }));
-        }}
-        >
-          {t('channels.rename')}
-        </Dropdown.Item>
-      </Dropdown.Menu>
+        <Dropdown.Menu>
+          <Dropdown.Item
+            onClick={() => dispatch(openModal({ type: 'removeChannel', extra: { id } }))}
+          >
+            {t('channels.remove')}
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => {
+            const extra = {
+              id,
+              name,
+            };
+            dispatch(openModal({ type: 'renameChannel', extra }));
+          }}
+          >
+            {t('channels.rename')}
+          </Dropdown.Item>
+        </Dropdown.Menu>
+        <span className="visually-hidden">{t('channels.channelControl')}</span>
+      </Dropdown.Toggle>
     </Dropdown>
   );
 }

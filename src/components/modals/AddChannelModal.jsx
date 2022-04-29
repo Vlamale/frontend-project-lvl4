@@ -2,7 +2,9 @@ import React, {
   useContext, useEffect, useRef, useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Modal } from 'react-bootstrap';
+import {
+  Button, Form, Modal,
+} from 'react-bootstrap';
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -63,18 +65,22 @@ function AddChannelModal() {
       </Modal.Header>
 
       <Form className="py-1 border-0 rounded-2 p-3" onSubmit={formik.handleSubmit}>
-        <Form.Control
-          ref={inputRef}
-          className="p-2 ps-2 form-control mb-2"
-          type="text"
-          name="name"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-          isInvalid={!!formik.errors.name}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.name}
-        </Form.Control.Feedback>
+
+        <Form.Group>
+          <Form.Control
+            ref={inputRef}
+            className="p-2 ps-2 form-control mb-2"
+            type="text"
+            name="name"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            isInvalid={!!formik.errors.name}
+          />
+          <Form.Label className="visually-hidden">{t('modals.addChannel.channelName')}</Form.Label>
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.name}
+          </Form.Control.Feedback>
+        </Form.Group>
 
         <Modal.Footer className="border-0">
           <Button

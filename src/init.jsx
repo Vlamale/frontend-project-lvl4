@@ -10,32 +10,32 @@ import store from './slices/index.js';
 import i18instance from './locales/i18n.js';
 
 const init = (socket) => {
-    const rollbarConfig = {
-        accessToken: '1eee01cbbf6c4972a59b624f02b6e26a',
-        captureUncaught: true,
-        captureUnhandledRejections: true,
-        payload: {
-            environment: 'production',
-        },
-    };
+  const rollbarConfig = {
+    accessToken: '1eee01cbbf6c4972a59b624f02b6e26a',
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+    payload: {
+      environment: 'production',
+    },
+  };
 
-    return (
-        <RollbarProvider config={rollbarConfig}>
-            <ErrorBoundary>
-                <Provider store={store}>
-                    <AppProvider>
-                        <BrowserRouter>
-                            <SocketProvider socket={socket}>
-                                <I18nextProvider i18n={i18instance}>
-                                    <App />
-                                </I18nextProvider>
-                            </SocketProvider>
-                        </BrowserRouter>
-                    </AppProvider>
-                </Provider>
-            </ErrorBoundary>
-        </RollbarProvider>
-    );
+  return (
+    <RollbarProvider config={rollbarConfig}>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <AppProvider>
+            <BrowserRouter>
+              <SocketProvider socket={socket}>
+                <I18nextProvider i18n={i18instance}>
+                  <App />
+                </I18nextProvider>
+              </SocketProvider>
+            </BrowserRouter>
+          </AppProvider>
+        </Provider>
+      </ErrorBoundary>
+    </RollbarProvider>
+  );
 };
 
 export default init;
