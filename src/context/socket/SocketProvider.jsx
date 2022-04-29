@@ -1,39 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, batch } from 'react-redux';
-import { io } from 'socket.io-client';
 import SocketContext from './SocketContext.js';
 import { addMessage } from '../../slices/messagesSlice.js';
 import {
   addChannel, removeChannel, renameChannel, setActiveChannel, setDefaultChannelAsActive,
 } from '../../slices/channelsSlice.js';
 
-function SocketProvider({ children }) {
-  /* eslint-disable no-shadow */
-  const socket = useRef(null);
+/* eslint-disable no-shadow */
+function SocketProvider({ children, socket }) {
   const dispatch = useDispatch();
   const [connection, setConnection] = useState(false);
 
   useEffect(() => {
-    socket.current = io();
-
-    socket.current.on('connect', () => {
-      socket.current.on('newMessage', (socket) => {
+    socket.on('connect', () => {
+      socket.on('newMessage', (socket) => {
         dispatch(addMessage(socket));
       });
 
-      socket.current.on('newChannel', (socket) => {
+      socket.on('newChannel', (socket) => {
         dispatch(addChannel(socket));
         dispatch(setActiveChannel(socket.id));
       });
 
-      socket.current.on('removeChannel', (socket) => {
+      socket.on('removeChannel', (socket) => {
         batch(() => {
           dispatch(removeChannel(socket.id));
           dispatch(setDefaultChannelAsActive());
         });
       });
 
-      socket.current.on('renameChannel', (socket) => {
+      socket.on('renameChannel', (socket) => {
         const updateData = {
           id: socket.id,
           changes: {
@@ -48,8 +44,8 @@ function SocketProvider({ children }) {
   }, []);
 
   return (
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <SocketContext.Provider value={{ socket: socket.current, connection }}>
+  /* eslint-disable-next-line react/jsx-no-constructed-context-values */
+    <SocketContext.Provider value={{ socket, connection }}>
       {children}
     </SocketContext.Provider>
   );
