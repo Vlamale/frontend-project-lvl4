@@ -13,7 +13,7 @@ const authRoutes = [
 const publicRoutes = [
   {
     path: routesPath.main,
-    redirectTo: '/login',
+    redirectTo: routesPath.login,
     Component: AuthPage,
   },
   {
