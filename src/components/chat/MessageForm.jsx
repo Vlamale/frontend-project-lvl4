@@ -59,7 +59,7 @@ function MessageForm() {
           <button
             className="btn"
             type="submit"
-            disabled={formik.values.message.trim().length === 0 || isSending}
+            disabled={formik.values.message.trim() === '' || isSending}
           >
             {t('messages.sendBtn')}
             <span className="visually-hidden">Отправить</span>
