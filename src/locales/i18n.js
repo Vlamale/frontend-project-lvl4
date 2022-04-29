@@ -2,7 +2,9 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import resources from './index.js';
 
-i18n
+const i18instance = i18n.createInstance();
+
+i18instance
   .use(initReactI18next)
   .init({
     debug: true,
@@ -15,4 +17,4 @@ i18n
     },
   });
 
-export default i18n;
+export default i18instance;
