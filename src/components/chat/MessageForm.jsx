@@ -30,7 +30,6 @@ function MessageForm() {
     },
     onSubmit: (values, { resetForm }) => {
       setIsSending(true);
-      console.log('sending', values.message);
       const userName = JSON.parse(localStorage.getItem('user-data')).username;
       const messageData = {
         messageText: filter.clean(values.message),

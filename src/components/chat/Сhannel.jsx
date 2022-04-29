@@ -49,7 +49,7 @@ function Channel({ data: { name, removable, id }, activeChannelId }) {
         className={buttonStyles}
         onClick={handleSelectChannel}
       >
-        <span>#&nbsp;</span>
+        #&nbsp;
         {' '}
         {name}
       </Button>
