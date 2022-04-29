@@ -12,7 +12,8 @@ export default {
       channelControl: 'Управление каналом',
     },
     messages: {
-      typePlaceholder: 'Введите сообщение...',
+      inputPlaceholder: 'Введите сообщение...',
+      inputLabel: 'Новое сообщение',
       sendBtn: 'Send',
       sendBtnName: 'Отправить',
       counter: {

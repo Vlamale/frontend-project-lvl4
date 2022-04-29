@@ -30,6 +30,7 @@ function MessageForm() {
     },
     onSubmit: (values, { resetForm }) => {
       setIsSending(true);
+      console.log('sending', values.message);
       const userName = JSON.parse(localStorage.getItem('user-data')).username;
       const messageData = {
         messageText: filter.clean(values.message),
@@ -52,10 +53,10 @@ function MessageForm() {
           <Form.Control
             ref={inputRef}
             className="border-0 p-0 ps-2 form-control"
-            aria-label="Новое сообщение"
+            aria-label={t('messages.inputLabel')}
             type="text"
             name="message"
-            placeholder={t('messages.typePlaceholder')}
+            placeholder={t('messages.inputPlaceholder')}
             onChange={formik.handleChange}
             value={formik.values.message}
           />
