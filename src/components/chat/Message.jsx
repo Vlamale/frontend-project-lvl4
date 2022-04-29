@@ -5,8 +5,8 @@ function Message({ message: { messageText, author } }) {
     <div className="chat-messages overflow-auto px-5 ">
       <div className="text-break mb-2">
         <b>{author}</b>
-        :
-        {messageText}
+        {': '}
+        { messageText}
       </div>
     </div>
   );
