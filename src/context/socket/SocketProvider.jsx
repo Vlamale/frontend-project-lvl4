@@ -12,7 +12,6 @@ function SocketProvider({ children, socket }) {
   const [connection, setConnection] = useState(false);
 
   useEffect(() => {
-    socket.on('connect', () => {
       socket.on('newMessage', (socket) => {
         dispatch(addMessage(socket));
       });
@@ -40,7 +39,6 @@ function SocketProvider({ children, socket }) {
       });
 
       setConnection(true);
-    });
   }, []);
 
   return (
