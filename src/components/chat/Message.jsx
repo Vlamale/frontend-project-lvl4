@@ -5,7 +5,7 @@ function Message({ message: { messageText, author } }) {
     <div className="text-break mb-2">
       <b>{author}</b>
       {': '}
-      {messageText}
+      <span>{messageText}</span>
     </div>
   );
 }
