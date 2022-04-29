@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { object, string } from 'yup';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { hideModal } from '../../slices/modalSlice.js';
@@ -27,12 +28,16 @@ function RenameChannelModal() {
     dispatch(hideModal());
   };
 
+  const renameChannelSchema = object({
+    name: string().required(t('formErrors.required')),
+  });
+
   const formik = useFormik({
     initialValues: {
       name: channelData.name,
     },
+    validationSchema: renameChannelSchema,
     onSubmit: (values, { setFieldError }) => {
-      setIsSending(true);
       const checkSameName = channels.find((ch) => ch.name === values.name);
 
       if (checkSameName) {
@@ -40,6 +45,7 @@ function RenameChannelModal() {
         return;
       }
 
+      setIsSending(true);
       const channelRequestData = {
         name: values.name,
         id: channelData.id,
@@ -63,7 +69,6 @@ function RenameChannelModal() {
         <Form.Group controlId="name">
           <Form.Control
             ref={inputRef}
-            required
             className="p-2 ps-2 form-control mb-2"
             type="text"
             name="name"
