@@ -26,8 +26,7 @@ function SignInPage() {
           </Card.Body>
           <Card.Footer className="text-center p-4">
             <span>{t('signIn.footer.text')}</span>
-            {' '}
-            <Link to={routesPath.signUp}>{t('signIn.footer.linkText')}</Link>
+            <Link to={routesPath.signUp}> {t('signIn.footer.linkText')}</Link>
           </Card.Footer>
         </Card>
       </Row>
