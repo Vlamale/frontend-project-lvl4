@@ -60,7 +60,7 @@ function RenameChannelModal() {
 
       <Form className="py-1 border-0 rounded-2 p-3" onSubmit={formik.handleSubmit}>
 
-        <Form.Group>
+        <Form.Group controlId="name">
           <Form.Control
             ref={inputRef}
             required
