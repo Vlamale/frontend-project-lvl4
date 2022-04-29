@@ -20,7 +20,7 @@ function MessageList() {
       <div className="d-flex flex-column h-100">
         <MessageListHeader />
 
-        <div className="overflow-auto">
+        <div className="chat-messages overflow-auto px-5 ">
           {messages
             .filter((message) => message.channel === activeChannelId)
             .map((message) => (
