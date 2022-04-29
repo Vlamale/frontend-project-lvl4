@@ -50,7 +50,6 @@ function MessageForm() {
       <Form className="py-1 border rounded-2" onSubmit={formik.handleSubmit}>
         <div className="input-group has-validation">
           <Form.Control
-            required
             ref={inputRef}
             className="border-0 p-0 ps-2 form-control"
             aria-label="Новое сообщение"
@@ -66,7 +65,7 @@ function MessageForm() {
             disabled={formik.values.message.trim() === '' || isSending}
           >
             {t('messages.sendBtn')}
-            <span className="visually-hidden">Отправить</span>
+            <span className="visually-hidden">{t('messages.sendBtnName')}</span>
           </button>
         </div>
       </Form>

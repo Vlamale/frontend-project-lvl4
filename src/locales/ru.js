@@ -14,6 +14,7 @@ export default {
     messages: {
       typePlaceholder: 'Введите сообщение...',
       sendBtn: 'Send',
+      sendBtnName: 'Отправить',
       counter: {
         key_zero: '{{count}} сообщений',
         key_one: '{{count}} сообщение',
