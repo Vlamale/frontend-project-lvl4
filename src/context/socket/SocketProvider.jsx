@@ -12,33 +12,33 @@ function SocketProvider({ children, socket }) {
   const [connection, setConnection] = useState(false);
 
   useEffect(() => {
-      socket.on('newMessage', (socket) => {
-        dispatch(addMessage(socket));
-      });
+    socket.on('newMessage', (socket) => {
+      dispatch(addMessage(socket));
+    });
 
-      socket.on('newChannel', (socket) => {
-        dispatch(addChannel(socket));
-        dispatch(setActiveChannel(socket.id));
-      });
+    socket.on('newChannel', (socket) => {
+      dispatch(addChannel(socket));
+      dispatch(setActiveChannel(socket.id));
+    });
 
-      socket.on('removeChannel', (socket) => {
-        batch(() => {
-          dispatch(removeChannel(socket.id));
-          dispatch(setDefaultChannelAsActive());
-        });
+    socket.on('removeChannel', (socket) => {
+      batch(() => {
+        dispatch(removeChannel(socket.id));
+        dispatch(setDefaultChannelAsActive());
       });
+    });
 
-      socket.on('renameChannel', (socket) => {
-        const updateData = {
-          id: socket.id,
-          changes: {
-            name: socket.name,
-          },
-        };
-        dispatch(renameChannel(updateData));
-      });
+    socket.on('renameChannel', (socket) => {
+      const updateData = {
+        id: socket.id,
+        changes: {
+          name: socket.name,
+        },
+      };
+      dispatch(renameChannel(updateData));
+    });
 
-      setConnection(true);
+    setConnection(true);
   }, []);
 
   return (

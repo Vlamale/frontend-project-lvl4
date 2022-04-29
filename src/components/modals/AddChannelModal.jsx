@@ -66,7 +66,7 @@ function AddChannelModal() {
 
       <Form className="py-1 border-0 rounded-2 p-3" onSubmit={formik.handleSubmit}>
 
-        <Form.Group>
+        <Form.Group controlId="name">
           <Form.Control
             ref={inputRef}
             className="p-2 ps-2 form-control mb-2"

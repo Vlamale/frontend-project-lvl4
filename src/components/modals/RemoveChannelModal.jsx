@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Modal, Form, Button } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { hideModal } from '../../slices/modalSlice.js';
@@ -17,8 +17,7 @@ function RemoveChannelModal() {
     dispatch(hideModal());
   };
 
-  const removeChannel = (e) => {
-    e.preventDefault();
+  const removeChannel = () => {
     setIsSending(true);
     socket.emit('removeChannel', { id: channelId }, () => {
       setIsSending(false);
@@ -37,23 +36,21 @@ function RemoveChannelModal() {
         {t('modals.removeChannel.bodyText')}
       </Modal.Body>
 
-      <Form className="py-1 border-0 rounded-2 p-3" onSubmit={removeChannel}>
-        <Modal.Footer className="border-0">
-          <Button
-            variant="secondary"
-            onClick={hideModalHandler}
-          >
-            {t('modals.removeChannel.cancleBtn')}
-          </Button>
-          <Button
-            type="submit"
-            variant="danger"
-            disabled={isSending}
-          >
-            {t('modals.removeChannel.submitBtn')}
-          </Button>
-        </Modal.Footer>
-      </Form>
+      <Modal.Footer className="border-0">
+        <Button
+          variant="secondary"
+          onClick={hideModalHandler}
+        >
+          {t('modals.removeChannel.cancleBtn')}
+        </Button>
+        <Button
+          onClick={removeChannel}
+          variant="danger"
+          disabled={isSending}
+        >
+          {t('modals.removeChannel.submitBtn')}
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 }
