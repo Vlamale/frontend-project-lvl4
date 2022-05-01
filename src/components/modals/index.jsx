@@ -1,19 +1,39 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { Modal } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
+import { hideModal } from '../../slices/modalSlice.js';
 import AddChannelModal from './AddChannelModal.jsx';
 import RemoveChannelModal from './RemoveChannelModal.jsx';
 import RenameChannelModal from './RenameChannelModal.jsx';
 
 const ModalMapping = {
-  addChannel: <AddChannelModal />,
-  removeChannel: <RemoveChannelModal />,
-  renameChannel: <RenameChannelModal />,
+  addChannel: AddChannelModal,
+  removeChannel: RemoveChannelModal,
+  renameChannel: RenameChannelModal,
 };
 
-function Modal() {
+function ModalWindow() {
   const { type, isOpened } = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
-  return isOpened && ModalMapping[type];
+  if (!isOpened) return null;
+
+  const ModalBody = ModalMapping[type];
+  const hideModalHandler = () => {
+    dispatch(hideModal());
+  };
+
+  return (
+    <Modal centered show onHide={hideModalHandler}>
+      <Modal.Header className="mb-4" closeButton>
+        <Modal.Title>{t(`modals.${type}.title`)}</Modal.Title>
+      </Modal.Header>
+
+      <ModalBody hideModalHandler={hideModalHandler} />
+    </Modal>
+  );
 }
 
-export default Modal;
+export default ModalWindow;

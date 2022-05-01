@@ -104,9 +104,8 @@ function SignUpForm() {
           value={formik.values.confirmPassword}
           onBlur={formik.handleBlur}
           isInvalid={
-                        submitFailed
-                        || (formik.touched.confirmPassword && formik.errors.confirmPassword)
-                    }
+            submitFailed || (formik.touched.confirmPassword && formik.errors.confirmPassword)
+          }
         />
         {formik.touched.confirmPassword && formik.errors.confirmPassword && (
         <Form.Control.Feedback type="invalid" tooltip>
