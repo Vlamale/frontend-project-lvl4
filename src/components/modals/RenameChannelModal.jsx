@@ -10,6 +10,10 @@ import SocketContext from '../../context/socket/SocketContext.js';
 import { channelsSelectors } from '../../slices/channelsSlice.js';
 import { notifySuccess } from '../../notify.js';
 
+const renameChannelSchema = object({
+  name: string().required(t('formErrors.required')),
+});
+
 function RenameChannelModal({ hideModalHandler }) {
   const channelData = useSelector((state) => state.modal.extra);
   const channels = useSelector(channelsSelectors.selectAll);
@@ -21,10 +25,6 @@ function RenameChannelModal({ hideModalHandler }) {
   useEffect(() => {
     inputRef.current?.select();
   }, []);
-
-  const renameChannelSchema = object({
-    name: string().required(t('formErrors.required')),
-  });
 
   const formik = useFormik({
     initialValues: {

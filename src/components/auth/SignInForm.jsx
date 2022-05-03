@@ -9,22 +9,22 @@ import { publicHost } from '../../http/index.js';
 import routesPath from '../../consts/routesPath.js';
 import { notifyError } from '../../notify.js';
 
+const signInSchema = object({
+  userName: string().required(),
+  userPassword: string().required(),
+});
+
 function SignInForm() {
   const { setIsAuthorized } = useContext(AppContext);
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const authSchema = object({
-    userName: string().required(),
-    userPassword: string().required(),
-  });
 
   const formik = useFormik({
     initialValues: {
       userName: '',
       userPassword: '',
     },
-    validationSchema: authSchema,
+    validationSchema: signInSchema,
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (values, { setFieldError }) => {

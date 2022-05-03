@@ -9,19 +9,19 @@ import { publicHost } from '../../http/index.js';
 import routesPath from '../../consts/routesPath.js';
 import { notifyError } from '../../notify.js';
 
+const signUpSchema = object({
+  userName: string().required(t('formErrors.required')).matches(/^.{3,35}$/, t('formErrors.from3To20')),
+  userPassword: string().required(t('formErrors.required')).min(6, t('formErrors.atLeast6')),
+  confirmPassword: string()
+    .required(t('formErrors.required'))
+    .oneOf([ref('userPassword'), null], t('formErrors.passwordsMatch')),
+});
+
 function SignUpForm() {
   const { setIsAuthorized } = useContext(AppContext);
   const [submitFailed, setSubmitFailed] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const authSchema = object({
-    userName: string().required(t('formErrors.required')).matches(/^.{3,35}$/, t('formErrors.from3To20')),
-    userPassword: string().required(t('formErrors.required')).min(6, t('formErrors.atLeast6')),
-    confirmPassword: string()
-      .required(t('formErrors.required'))
-      .oneOf([ref('userPassword'), null], t('formErrors.passwordsMatch')),
-  });
 
   const formik = useFormik({
     initialValues: {
@@ -29,7 +29,7 @@ function SignUpForm() {
       userPassword: '',
       confirmPassword: '',
     },
-    validationSchema: authSchema,
+    validationSchema: signUpSchema,
     onSubmit: async (values, { setFieldError }) => {
       try {
         const { data } = await publicHost.post('/signup', {

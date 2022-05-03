@@ -12,6 +12,10 @@ import SocketContext from '../../context/socket/SocketContext.js';
 import { channelsSelectors } from '../../slices/channelsSlice.js';
 import { notifySuccess } from '../../notify.js';
 
+const addChannelSchema = object({
+  name: string().required(t('formErrors.required')),
+});
+
 function AddChannelModal({ hideModalHandler }) {
   const channels = useSelector(channelsSelectors.selectAll);
   const { socket } = useContext(SocketContext);
@@ -22,10 +26,6 @@ function AddChannelModal({ hideModalHandler }) {
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
-
-  const addChannelSchema = object({
-    name: string().required(t('formErrors.required')),
-  });
 
   const formik = useFormik({
     initialValues: {
