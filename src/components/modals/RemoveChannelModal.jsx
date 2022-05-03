@@ -1,15 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import SocketContext from '../../context/socket/SocketContext.js';
 import { notifySuccess } from '../../notify.js';
+import useSocketContext from '../../hooks/useSocketContext.js';
 
 function RemoveChannelModal({ hideModalHandler }) {
-  const { socket } = useContext(SocketContext);
+  const { t } = useTranslation();
+  const { socket } = useSocketContext();
   const channelId = useSelector((state) => state.modal.extra.id);
   const [isSending, setIsSending] = useState(false);
-  const { t } = useTranslation();
 
   const removeChannel = () => {
     setIsSending(true);

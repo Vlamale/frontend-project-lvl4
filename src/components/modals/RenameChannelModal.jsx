@@ -1,26 +1,26 @@
 import React, {
-  useContext, useEffect, useRef, useState,
+  useEffect, useRef, useState,
 } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import SocketContext from '../../context/socket/SocketContext.js';
 import { channelsSelectors } from '../../slices/channelsSlice.js';
 import { notifySuccess } from '../../notify.js';
+import useSocketContext from '../../hooks/useSocketContext.js';
 
 const renameChannelSchema = object({
-  name: string().required(t('formErrors.required')),
+  name: string().required('formErrors.required'),
 });
 
 function RenameChannelModal({ hideModalHandler }) {
+  const { t } = useTranslation();
   const channelData = useSelector((state) => state.modal.extra);
   const channels = useSelector(channelsSelectors.selectAll);
-  const { socket } = useContext(SocketContext);
+  const { socket } = useSocketContext();
   const inputRef = useRef(null);
   const [isSending, setIsSending] = useState(false);
-  const { t } = useTranslation();
 
   useEffect(() => {
     inputRef.current?.select();
@@ -67,7 +67,7 @@ function RenameChannelModal({ hideModalHandler }) {
         />
         <Form.Label className="visually-hidden">{t('modals.renameChannel.channelName')}</Form.Label>
         <Form.Control.Feedback type="invalid">
-          {formik.errors.name}
+          {t(formik.errors.name)}
         </Form.Control.Feedback>
       </Form.Group>
 

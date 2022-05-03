@@ -1,19 +1,19 @@
 import { useFormik } from 'formik';
 import React, {
-  useContext, useState, useRef, useEffect,
+  useState, useRef, useEffect,
 } from 'react';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
-import SocketContext from '../../context/socket/SocketContext.js';
+import useSocketContext from '../../hooks/useSocketContext.js';
 
 function MessageForm() {
+  const { t } = useTranslation();
   const activeChannelId = useSelector((state) => state.channels.activeChannelId);
   const [isSending, setIsSending] = useState(false);
-  const { socket } = useContext(SocketContext);
+  const { socket } = useSocketContext();
   const inputRef = useRef(null);
-  const { t } = useTranslation();
 
   useEffect(() => {
     filter.add(filter.getDictionary('ru'));

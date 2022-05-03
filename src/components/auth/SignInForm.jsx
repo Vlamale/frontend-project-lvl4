@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Form, FloatingLabel, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useTranslation } from 'react-i18next';
-import AppContext from '../../context/app/AppContext.js';
 import { publicHost } from '../../http/index.js';
 import routesPath from '../../consts/routesPath.js';
 import { notifyError } from '../../notify.js';
+import useAppContext from '../../hooks/useAppContext.js';
 
 const signInSchema = object({
   userName: string().required(),
@@ -15,9 +15,9 @@ const signInSchema = object({
 });
 
 function SignInForm() {
-  const { setIsAuthorized } = useContext(AppContext);
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const { setIsAuthorized } = useAppContext();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {

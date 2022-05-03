@@ -1,27 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, FloatingLabel, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { object, string, ref } from 'yup';
 import { useTranslation } from 'react-i18next';
-import AppContext from '../../context/app/AppContext.js';
 import { publicHost } from '../../http/index.js';
 import routesPath from '../../consts/routesPath.js';
 import { notifyError } from '../../notify.js';
+import useAppContext from '../../hooks/useAppContext.js';
 
 const signUpSchema = object({
-  userName: string().required(t('formErrors.required')).matches(/^.{3,35}$/, t('formErrors.from3To20')),
-  userPassword: string().required(t('formErrors.required')).min(6, t('formErrors.atLeast6')),
+  userName: string().required('formErrors.required').matches(/^.{3,35}$/, 'formErrors.from3To20'),
+  userPassword: string().required('formErrors.required').min(6, 'formErrors.atLeast6'),
   confirmPassword: string()
-    .required(t('formErrors.required'))
-    .oneOf([ref('userPassword'), null], t('formErrors.passwordsMatch')),
+    .required('formErrors.required')
+    .oneOf([ref('userPassword'), null], 'formErrors.passwordsMatch'),
 });
 
 function SignUpForm() {
-  const { setIsAuthorized } = useContext(AppContext);
+  const { t } = useTranslation();
+  const { setIsAuthorized } = useAppContext();
   const [submitFailed, setSubmitFailed] = useState(false);
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -68,9 +68,9 @@ function SignUpForm() {
           onBlur={formik.handleBlur}
         />
         {formik.touched.userName && formik.errors.userName && (
-        <Form.Control.Feedback tooltip type="invalid">
-          {formik.errors.userName}
-        </Form.Control.Feedback>
+          <Form.Control.Feedback tooltip type="invalid">
+            {t(formik.errors.userName)}
+          </Form.Control.Feedback>
         )}
       </FloatingLabel>
 
@@ -87,9 +87,9 @@ function SignUpForm() {
           onBlur={formik.handleBlur}
         />
         {formik.touched.userPassword && formik.errors.userPassword && (
-        <Form.Control.Feedback tooltip type="invalid">
-          {formik.errors.userPassword}
-        </Form.Control.Feedback>
+          <Form.Control.Feedback tooltip type="invalid">
+            {t(formik.errors.userPassword)}
+          </Form.Control.Feedback>
         )}
       </FloatingLabel>
 
@@ -108,9 +108,9 @@ function SignUpForm() {
           onBlur={formik.handleBlur}
         />
         {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-        <Form.Control.Feedback tooltip type="invalid">
-          {formik.errors.confirmPassword}
-        </Form.Control.Feedback>
+          <Form.Control.Feedback tooltip type="invalid">
+            {t(formik.errors.confirmPassword)}
+          </Form.Control.Feedback>
         )}
       </FloatingLabel>
 

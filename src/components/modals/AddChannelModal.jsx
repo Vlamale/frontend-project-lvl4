@@ -1,5 +1,5 @@
 import React, {
-  useContext, useEffect, useRef, useState,
+  useEffect, useRef, useState,
 } from 'react';
 import { useSelector } from 'react-redux';
 import {
@@ -8,20 +8,20 @@ import {
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import SocketContext from '../../context/socket/SocketContext.js';
 import { channelsSelectors } from '../../slices/channelsSlice.js';
 import { notifySuccess } from '../../notify.js';
+import useSocketContext from '../../hooks/useSocketContext.js';
 
 const addChannelSchema = object({
-  name: string().required(t('formErrors.required')),
+  name: string().required('formErrors.required'),
 });
 
 function AddChannelModal({ hideModalHandler }) {
+  const { t } = useTranslation();
   const channels = useSelector(channelsSelectors.selectAll);
-  const { socket } = useContext(SocketContext);
+  const { socket } = useSocketContext();
   const [isSending, setIsSending] = useState(false);
   const inputRef = useRef(null);
-  const { t } = useTranslation();
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -67,7 +67,7 @@ function AddChannelModal({ hideModalHandler }) {
         />
         <Form.Label className="visually-hidden">{t('modals.addChannel.channelName')}</Form.Label>
         <Form.Control.Feedback type="invalid">
-          {formik.errors.name}
+          {t(formik.errors.name)}
         </Form.Control.Feedback>
       </Form.Group>
 

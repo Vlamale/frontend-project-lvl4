@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { openModal } from '../../slices/modalSlice.js';
 
 function ChannelListHeader() {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const openModalHandler = () => {
     dispatch(openModal({ type: 'addChannel', extra: null }));

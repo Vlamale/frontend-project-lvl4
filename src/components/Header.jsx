@@ -1,14 +1,14 @@
+import React from 'react';
 import { Navbar, Container, Button } from 'react-bootstrap';
-import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import AppContext from '../context/app/AppContext.js';
 import routesPath from '../consts/routesPath.js';
+import useAppContext from '../hooks/useAppContext.js';
 
 function Header() {
-  const navigate = useNavigate();
-  const { setIsAuthorized, isAuthorized } = useContext(AppContext);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { setIsAuthorized, isAuthorized } = useAppContext();
 
   const logOut = () => {
     localStorage.removeItem('user-data');

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import notFoundImg from '../img/notFoundImg.webp';
 import routesPath from '../consts/routesPath.js';
 
