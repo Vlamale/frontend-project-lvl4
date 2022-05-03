@@ -57,13 +57,13 @@ function AddChannelModal({ hideModalHandler }) {
 
       <Form.Group controlId="name">
         <Form.Control
-          ref={inputRef}
           className="p-2 ps-2 form-control mb-2"
           type="text"
           name="name"
-          onChange={formik.handleChange}
+          ref={inputRef}
           value={formik.values.name}
           isInvalid={!!formik.errors.name}
+          onChange={formik.handleChange}
         />
         <Form.Label className="visually-hidden">{t('modals.addChannel.channelName')}</Form.Label>
         <Form.Control.Feedback type="invalid">

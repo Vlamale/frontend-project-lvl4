@@ -27,7 +27,7 @@ function ModalWindow() {
 
   return (
     <Modal centered show onHide={hideModalHandler}>
-      <Modal.Header className="mb-4" closeButton>
+      <Modal.Header closeButton className="mb-4">
         <Modal.Title>{t(`modals.${type}.title`)}</Modal.Title>
       </Modal.Header>
 

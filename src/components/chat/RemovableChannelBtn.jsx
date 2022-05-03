@@ -10,7 +10,7 @@ function RemovableChannelBtn({ channelData: { name, isActiveChannel, id } }) {
   const dispatch = useDispatch();
 
   return (
-    <Dropdown as={ButtonGroup} className="w-100">
+    <Dropdown className="w-100" as={ButtonGroup}>
       <ChannelBtn channelData={{ name, isActiveChannel, id }} />
 
       <Dropdown.Toggle

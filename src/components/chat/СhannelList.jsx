@@ -10,12 +10,12 @@ function ChannelList() {
   const activeChannelId = useSelector((state) => state.channels.activeChannelId);
 
   return (
-    <Col xs={4} className="col-md-2 border-end pt-5 px-0 bg-light">
+    <Col className="col-md-2 border-end pt-5 px-0 bg-light" xs={4}>
       <ChannelListHeader />
 
       <ul className="nav flex-column nav-pills nav-fill px-2">
         {channels.map((data) => (
-          <li key={data.id} className="w-100">
+          <li className="w-100" key={data.id}>
             <Channel data={data} activeChannelId={activeChannelId} />
           </li>
         ))}

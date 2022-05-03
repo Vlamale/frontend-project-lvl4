@@ -62,13 +62,13 @@ function SignUpForm() {
           type="text"
           name="userName"
           placeholder={t('signUp.namePlaceholder')}
-          onChange={formik.handleChange}
           value={formik.values.userName}
-          onBlur={formik.handleBlur}
           isInvalid={submitFailed || (formik.touched.userName && formik.errors.userName)}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
         {formik.touched.userName && formik.errors.userName && (
-        <Form.Control.Feedback type="invalid" tooltip>
+        <Form.Control.Feedback tooltip type="invalid">
           {formik.errors.userName}
         </Form.Control.Feedback>
         )}
@@ -81,13 +81,13 @@ function SignUpForm() {
           type="password"
           name="userPassword"
           placeholder={t('signUp.passwordPlaceholder')}
-          onChange={formik.handleChange}
           value={formik.values.userPassword}
-          onBlur={formik.handleBlur}
           isInvalid={submitFailed || (formik.touched.userPassword && formik.errors.userPassword)}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
         {formik.touched.userPassword && formik.errors.userPassword && (
-        <Form.Control.Feedback type="invalid" tooltip>
+        <Form.Control.Feedback tooltip type="invalid">
           {formik.errors.userPassword}
         </Form.Control.Feedback>
         )}
@@ -100,15 +100,15 @@ function SignUpForm() {
           type="password"
           name="confirmPassword"
           placeholder={t('signUp.confirmPasswordPlaceholder')}
-          onChange={formik.handleChange}
           value={formik.values.confirmPassword}
-          onBlur={formik.handleBlur}
           isInvalid={
             submitFailed || (formik.touched.confirmPassword && formik.errors.confirmPassword)
           }
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
         {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-        <Form.Control.Feedback type="invalid" tooltip>
+        <Form.Control.Feedback tooltip type="invalid">
           {formik.errors.confirmPassword}
         </Form.Control.Feedback>
         )}

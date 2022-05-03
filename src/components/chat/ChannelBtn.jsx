@@ -25,8 +25,8 @@ function ChannelBtn({ channelData: { name, isActiveChannel, id } }) {
 
   return (
     <Button
-      variant={isActiveChannel ? 'secondary' : 'light'}
       className={buttonStyles}
+      variant={isActiveChannel ? 'secondary' : 'light'}
       onClick={handleSelectChannel}
     >
       #&nbsp;

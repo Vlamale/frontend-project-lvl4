@@ -34,9 +34,9 @@ function RemoveChannelModal({ hideModalHandler }) {
           {t('modals.removeChannel.cancleBtn')}
         </Button>
         <Button
-          onClick={removeChannel}
           variant="danger"
           disabled={isSending}
+          onClick={removeChannel}
         >
           {t('modals.removeChannel.submitBtn')}
         </Button>

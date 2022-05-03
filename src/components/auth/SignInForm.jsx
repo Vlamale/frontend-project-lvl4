@@ -55,9 +55,9 @@ function SignInForm() {
           type="text"
           name="userName"
           placeholder={t('signIn.namePlaceholder')}
-          onChange={formik.handleChange}
           value={formik.values.userName}
           isInvalid={!!formik.errors.userName}
+          onChange={formik.handleChange}
         />
       </FloatingLabel>
 
@@ -68,11 +68,11 @@ function SignInForm() {
           type="password"
           name="userPassword"
           placeholder={t('signIn.passwordPlaceholder')}
-          onChange={formik.handleChange}
           value={formik.values.userPassword}
           isInvalid={!!formik.errors.userPassword}
+          onChange={formik.handleChange}
         />
-        <Form.Control.Feedback type="invalid" tooltip>
+        <Form.Control.Feedback tooltip type="invalid">
           {formik.errors.userPassword}
         </Form.Control.Feedback>
       </FloatingLabel>

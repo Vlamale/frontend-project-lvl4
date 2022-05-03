@@ -20,7 +20,7 @@ function Header() {
     <Navbar className="shadow-sm bg-white" bg="light" variant="light">
       <Container>
         <Link className="navbar-brand" to={routesPath.main}>{t('header.title')}</Link>
-        {isAuthorized && <Button onClick={logOut} variant="primary">{t('header.logOut')}</Button>}
+        {isAuthorized && <Button variant="primary" onClick={logOut}>{t('header.logOut')}</Button>}
       </Container>
     </Navbar>
   );

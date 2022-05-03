@@ -13,7 +13,7 @@ function SignUpPage() {
           <Card.Body className="row p-5">
 
             <Col className="col-12 col-md-6 d-flex align-items-center justify-content-center" xs={12} md={6}>
-              <Image src={signUpImage} roundedCircle />
+              <Image roundedCircle src={signUpImage} />
             </Col>
 
             <SignUpForm />

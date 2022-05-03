@@ -50,14 +50,14 @@ function MessageForm() {
       <Form className="py-1 border rounded-2" onSubmit={formik.handleSubmit}>
         <div className="input-group has-validation">
           <Form.Control
-            ref={inputRef}
             className="border-0 p-0 ps-2 form-control"
-            aria-label={t('messages.inputLabel')}
             type="text"
             name="message"
             placeholder={t('messages.inputPlaceholder')}
-            onChange={formik.handleChange}
+            aria-label={t('messages.inputLabel')}
             value={formik.values.message}
+            ref={inputRef}
+            onChange={formik.handleChange}
           />
           <button
             className="btn"
